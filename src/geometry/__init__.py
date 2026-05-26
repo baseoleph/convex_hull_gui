@@ -1,0 +1,1 @@
+"""Geometric utility functions."""

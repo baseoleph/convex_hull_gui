@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "convex_hull"
+version = "0.1.0"
+description = "Chan's algorithm for 3D convex hull construction"
+authors = ["baseoleph <stefanov.vasilii.vl@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "adapters", from = "src" },
+    { include = "algorithms", from = "src" },
+    { include = "app", from = "src" },
+    { include = "domain", from = "src" },
+    { include = "generators", from = "src" },
+    { include = "geometry", from = "src" },
+    { include = "gui", from = "src" },
+    { include = "rendering", from = "src" },
+    { include = "verification", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.13,<3.15"
+
+# GUI runtime — matplotlib required by pyvista internally for colormaps.
+numpy = "^2.4.4"
+matplotlib = "^3.9"
+pyvista = "^0.47.3"
+pyside6 = "^6.11.0"
+pyvistaqt = "^0.11.4"
+
+[tool.poetry.group.build]
+optional = true
+
+[tool.poetry.group.build.dependencies]
+pyinstaller = "^6.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+pytest-cov = "^6.0"
+hypothesis = "^6.130"
+mypy = "^1.15"
+ruff = "^0.11"
+scipy = "^1.17.1"
+
+[tool.poetry.scripts]
+convex_hull = "gui.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["D104"]
+"tests/**/*.py" = ["D100", "D101", "D102", "D103"]
+
+[tool.mypy]
+mypy_path = "src"
+strict = true
+warn_unreachable = true
+disallow_untyped_decorators = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--strict-markers --strict-config -ra"
+markers = []
