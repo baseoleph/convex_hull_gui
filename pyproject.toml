@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "convex_hull"
-version = "0.1.0"
+version = "1.0.0"
 description = "Chan's algorithm for 3D convex hull construction"
 authors = ["baseoleph <stefanov.vasilii.vl@gmail.com>"]
 readme = "README.md"
