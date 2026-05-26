@@ -104,8 +104,9 @@ def show_points(
         plotter = pv.Plotter()
 
     cloud = points_to_polydata(points)
-    plotter.add_mesh(
+    plotter.add_points(
         cloud,
+        style="points_gaussian",
         color=_POINT_COLOR,
         point_size=_DEFAULT_POINT_SIZE,
         render_points_as_spheres=True,
@@ -154,15 +155,17 @@ def show_hull_with_points(
     interior_pts = [p for i, p in enumerate(result.points) if i not in result.vertex_indices]
 
     if hull_pts:
-        plotter.add_mesh(
+        plotter.add_points(
             points_to_polydata(hull_pts),
+            style="points_gaussian",
             color=_HULL_VERTEX_COLOR,
             point_size=point_size * _HULL_VERTEX_SIZE_FACTOR,
             render_points_as_spheres=True,
         )
     if interior_pts:
-        plotter.add_mesh(
+        plotter.add_points(
             points_to_polydata(interior_pts),
+            style="points_gaussian",
             color=_INTERIOR_POINT_COLOR,
             point_size=point_size,
             render_points_as_spheres=True,
